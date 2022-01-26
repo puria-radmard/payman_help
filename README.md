@@ -1,6 +1,6 @@
-We are trying to solve 
+### Make sure to view in light mode to see maths!!
 
-$Ax=b$ for $x$, where $A\in\R^{m\times n}, x\in\R^{n}, A\in\R^{m}$, with $n=27, m=556$.
+We are trying to solve 
 
 <img src="https://render.githubusercontent.com/render/math?math=Ax=b">
 
