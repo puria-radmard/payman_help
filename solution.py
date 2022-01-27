@@ -19,10 +19,11 @@ def ordinary_least_squares(M, c):
 
 def get_squared_error(M, x, c):
     """
-        Get the OLS error of Mx = c: ||Mx - c||^2           
+        Get the OLS error of Mx = c: ||Mx - c||^2 - i.e. the residuals of your OLS regression
+        These are then normalised by the problem length scale, namely ||c||^2           
     """
     residual = M@x - c
-    return residual.T @ residual
+    return (residual.T @ residual) / (c.T @ c)
 
 
 

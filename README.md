@@ -17,7 +17,7 @@ We are trying to bring $Ax$ as close as possible to $b$ - we can treat this like
 
 Expanding the term in the minimisation, we have: 
 
-<img src="https://render.githubusercontent.com/render/math?math=f(x) = (Ax - b)^\intercal (Ax-b) ">
+<img src="https://render.githubusercontent.com/render/math?math=f(x) = (Ax - b)^\intercal (Ax-b)">
 <img src="https://render.githubusercontent.com/render/math?math=f(x) = (x^\intercal A^\intercal - b^\intercal)(Ax-b)">
 <img src="https://render.githubusercontent.com/render/math?math=f(x) = x^\intercal A^\intercal Ax + b^\intercal b - b^\intercal Ax - x^\intercal A^\intercal b">
 
@@ -31,4 +31,16 @@ Differenting wrt $x$ and setting to zero:
 
 The psuedoinverse is implemented in solution.py
 
+However, you also have another loss function to minimise, which is the distance from the target, $\tilde x$.
 
+You can generalise the overall loss function as <img src="https://render.githubusercontent.com/render/math?math=f(x) = (x^\intercal A^\intercal - b^\intercal)(Ax-b) + \lambda (x - \tilde x)^\intercal (x - \tilde x)">
+
+Where lambda weighs the importance of staying close to the target vector. Following the same logic, the solution is now
+
+<img src="https://render.githubusercontent.com/render/math?math=x^*_\lambda = (A^\intercal A + \lambda I)^{-1} (\lambda \tilde x + A^\intercal b)">
+
+This is implemented in solution2.py, and performance is compared for some values of $\lambda$
+
+By comparing the scales of the summed pairs (that is comparing $A^\intercal A$ with $\lambda I$, and $\lambda \tilde x$ with $A^\intercal b$), we can tell that \lambda must be on the order of 10000. Indeed, errors.png shows need for a lambda on this order when errors equal each other.
+
+By adjusting `_l` in ` x_regularised = regularised_ordinary_least_squares(A, b, target_x, _l)`, you can find a solution that suits you. NB: the errors in errors.png are not the actual, raw errors for each regularisation weight, but the normalised errors. See function documentation for more information here.
