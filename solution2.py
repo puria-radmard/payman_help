@@ -21,10 +21,10 @@ def regularised_ordinary_least_squares(M, c, x_target, l):
 def get_normalised_regularisation_error(x_solution, x_target):
     """
         Return the normalised normalised regularisation error (without weighting)
-            = ||x_solution - x_target||^2 / (||x_solution||^2 * ||x_target||^2)
+            = ||x_solution - x_target||^2 / (||x_target||^2)
     """
     numerator = (x_solution - x_target).T @ (x_solution - x_target)
-    denominator = np.linalg.norm(x_solution) * np.linalg.norm(x_target)
+    denominator = x_target.T @ x_target
     return numerator / denominator
 
 
